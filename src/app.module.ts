@@ -8,6 +8,7 @@ import { CatsModule } from './cats/cats.module';
 import { CatsService } from './cats/cats.service';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: process.env.DATABASE_PW,
       database: 'placepic-typeORM',
       charset: 'utf8mb4',
-      entities: [],
+      entities: [User],
       synchronize: true,
     }),
   ], // 이 모듈에 필요한 공급자를 내보내는 가져온 모듈 목록
