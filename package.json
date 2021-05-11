@@ -28,6 +28,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/typeorm": "^7.1.5",
+    "dayjs": "^1.10.4",
     "express": "^4.17.1",
     "mysql2": "^2.2.5",
     "reflect-metadata": "^0.1.13",

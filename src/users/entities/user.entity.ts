@@ -1,28 +1,29 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-} from 'typeORM';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeORM';
+import dayjs from 'dayjs';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   userIdx: number;
 
-  @Column({ length: 200 })
+  @Column({ nullable: false, unique: true })
+  email: string;
+
+  @Column({ length: 200, nullable: false })
+  password: string;
+
+  @Column({ length: 200, nullable: false })
   salt: string;
 
-  @Column({ length: 45 })
+  @Column({ length: 45, nullable: false })
   userName: string;
 
-  @Column()
-  @CreateDateColumn()
+  @Column({ default: 111 })
   userCreatedAt: number;
 
-  @Column({ length: 45 })
+  @Column({ length: 45, nullable: false })
   phoneNumber: string;
 
-  @Column({ length: 45 })
+  @Column({ length: 45, default: '1234' })
   certificationNumber: string;
 }
