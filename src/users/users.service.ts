@@ -26,8 +26,8 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(userIdx: number): Promise<User> {
-    return this.usersRepository.findOne(userIdx);
+  findOne<T>(args: T): Promise<User> {
+    return this.usersRepository.findOne(args);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

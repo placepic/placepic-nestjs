@@ -17,7 +17,13 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
+    if (
+      this.usersService.findOne({
+        email: createUserDto.email,
+      })
+    ) {
+      return { message: 'existed email' };
+    }
     return this.usersService.create(createUserDto);
   }
 
@@ -26,9 +32,9 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  @Get(':userIdx')
+  findOne(@Param('userIdx') userIdx: number) {
+    return this.usersService.findOne(+userIdx);
   }
 
   @Patch(':id')
