@@ -1,9 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePlaceDto } from './dto/create-place.dto';
 import { UpdatePlaceDto } from './dto/update-place.dto';
+import { Repository } from 'typeorm';
+import { Place } from './entities/place.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PlacesService {
+  constructor(
+    @InjectRepository(Place)
+    private placeRepository: Repository<Place>,
+  ) {}
   create(createPlaceDto: CreatePlaceDto) {
     return 'This action adds a new place';
   }
