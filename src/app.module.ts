@@ -6,7 +6,7 @@ import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
-import { PlaceModule } from './place/place.module';
+import { Place } from './places/entities/place.entity';
 import { PlacesModule } from './places/places.module';
 
 @Module({
@@ -21,10 +21,9 @@ import { PlacesModule } from './places/places.module';
       password: process.env.DATABASE_PW,
       database: 'placepic-typeORM',
       charset: 'utf8mb4',
-      entities: [User],
+      entities: [User, Place],
       synchronize: true,
     }),
-    PlaceModule,
     PlacesModule,
   ], // 이 모듈에 필요한 공급자를 내보내는 가져온 모듈 목록
   controllers: [AppController], // 인스턴스화 되어야 하는 모듈에 정의된 컨트롤러 세트
