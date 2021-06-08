@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
@@ -7,19 +7,20 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UsersService {
+  private static readonly logger = new Logger(UsersService.name);
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
   ) {}
-  create(createUserDto: CreateUserDto): Promise<User> {
-    const user = new User();
-    user.userName = createUserDto.userName;
-    user.email = createUserDto.email;
-    user.phoneNumber = createUserDto.phoneNumber;
-    user.certificationNumber = createUserDto.certificationNumber;
-    user.salt = createUserDto.salt;
-    user.password = createUserDto.password;
-    return this.usersRepository.save(user);
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    try {
+      const result = await this.usersRepository.save(createUserDto);
+      UsersService.logger.debug(result);
+      return result;
+    } catch (error) {
+      UsersService.logger.debug(error);
+      throw error;
+    }
   }
 
   findAll(): Promise<User[]> {
@@ -27,6 +28,7 @@ export class UsersService {
   }
 
   findOne<T>(args: T): Promise<User> {
+    console.log(args);
     return this.usersRepository.findOne(args);
   }
 

@@ -39,18 +39,20 @@ describe('UsersService', () => {
   describe('User Service', () => {
     describe('create()', () => {
       const createArgs = {
-        userName: faker.lorem.sentence(),
-        email: faker.lorem.sentence(),
+        userName: faker.name.lastName(),
+        email: faker.internet.email(),
         phoneNumber: faker.phone.phoneNumber(),
         certificationNumber: '1234',
         salt: 'hash',
         password: faker.internet.password(),
       };
+      console.log(createArgs);
       it('should fail on exception', async () => {
         usersRepository.save.mockRejectedValue('save error');
         const result = await service.create(createArgs);
         expect(result).toEqual('save error');
       });
+
       it('should create Users', async () => {
         usersRepository.save.mockResolvedValue(createArgs);
         const result = await service.create(createArgs);

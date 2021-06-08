@@ -17,13 +17,6 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    if (
-      this.usersService.findOne({
-        email: createUserDto.email,
-      })
-    ) {
-      return { message: 'existed email' };
-    }
     return this.usersService.create(createUserDto);
   }
 
