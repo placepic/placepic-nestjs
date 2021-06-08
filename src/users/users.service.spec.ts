@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 import * as faker from 'faker';
-import { create } from 'eslint/lib/rules/*';
 
 const mockUserRepository = () => ({
   save: jest.fn(),
@@ -46,25 +45,23 @@ describe('UsersService', () => {
         salt: 'hash',
         password: faker.internet.password(),
       };
-      console.log(createArgs);
-      it('should fail on exception', async () => {
+
+      test('should fail on exception', async () => {
         usersRepository.save.mockRejectedValue('save error');
-        const result = await service.create(createArgs);
-        expect(result).toEqual('save error');
+        try {
+          await service.create(createArgs);
+        } catch (error) {
+          expect(error).toEqual('save error');
+        }
       });
 
-      it('should create Users', async () => {
+      test('should create Users', async () => {
         usersRepository.save.mockResolvedValue(createArgs);
         const result = await service.create(createArgs);
         expect(usersRepository.save).toHaveBeenCalledTimes(1); // save가 한번 불러졌니?
         expect(usersRepository.save).toHaveBeenCalledWith(createArgs); // 매개변수가 createARgs가 같니?
-
         expect(result).toEqual(createArgs);
       });
-    });
-
-    it('should be defined', () => {
-      expect(service).toBeDefined();
     });
   });
 });
