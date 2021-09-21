@@ -6,8 +6,6 @@ import { UsersModule } from './users/users.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
-import { PlaceModule } from './place/place.module';
-import { PlacesModule } from './places/places.module';
 
 @Module({
   imports: [
@@ -24,8 +22,6 @@ import { PlacesModule } from './places/places.module';
       entities: [User],
       synchronize: true,
     }),
-    PlaceModule,
-    PlacesModule,
   ], // 이 모듈에 필요한 공급자를 내보내는 가져온 모듈 목록
   controllers: [AppController], // 인스턴스화 되어야 하는 모듈에 정의된 컨트롤러 세트
   providers: [AppService], // Nest 인젝터에 의해 인스턴스화되고 적어도 이 모듈에서 공유될 수 있는 공급자.

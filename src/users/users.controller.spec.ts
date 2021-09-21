@@ -17,10 +17,10 @@ describe('UsersController', () => {
   });
 
   describe(' find All', () => {
-    it('should return an array of user', async () => {
-      const result = ['test'];
-      jest.spyOn(usersService, 'findAll').mockImplementation(() => result);
-      expect(usersController).toBeDefined();
-    });
+    // it('should return an array of user', async () => {
+    //   const result = ['test'];
+    //   jest.spyOn(usersService, 'findAll').mockImplementation(() => result);
+    //   expect(usersController).toBeDefined();
+    // });
   });
 });
